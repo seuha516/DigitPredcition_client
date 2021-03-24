@@ -1,0 +1,23 @@
+.result {
+  width: 400px;
+  height: 250px;
+  margin-top: -80px;
+  margin-bottom: -50px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  .answer {
+    font-size: 150px;
+    font-family: "Baloo 2", cursive;
+    color: rgb(0, 0, 0);
+    text-shadow: 2px 0 white, 0 2px white, 2px 0 white, 0 2px white;
+  }
+  .prob {
+    font-size: 60px;
+    font-family: "Baloo 2", cursive;
+    color: rgb(95, 95, 95);
+    text-shadow: 2px 0 white, 0 2px white, 2px 0 white, 0 2px white;
+    margin-left: 30px;
+  }
+}

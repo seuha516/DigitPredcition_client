@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+*:focus {
+  outline: none;
+}
+html {
+  height: 100%;
+}
+body {
+  background: -webkit-linear-gradient(90deg, #74ebd5, #acb6e5);
+}
+.items {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 445px;
+  height: 700px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -222.5px;
+  margin-top: -330px;
+}
