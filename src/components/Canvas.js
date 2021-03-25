@@ -37,7 +37,7 @@ const Canvas = forwardRef((props, ref) => {
     canvas.addEventListener("mousemove", Move);
     canvas.addEventListener("mouseup", Finish);
     canvas.addEventListener("mouseout", Finish);
-    setInterval(CheckImage, 100);
+    setInterval(CheckImage, 200);
   }, []);
   useEffect(() => {
     ctx.strokeStyle = props.pen ? "black" : "white";
@@ -63,6 +63,7 @@ const Canvas = forwardRef((props, ref) => {
     drawable = false;
   }
   function CheckImage() {
+    console.log("전송");
     const imgBase64 = canvas.toDataURL("image/png", "image/octet-stream");
     const decodImg = atob(imgBase64.split(",")[1]);
     let array = [];
@@ -74,7 +75,7 @@ const Canvas = forwardRef((props, ref) => {
     let formData = new FormData();
     formData.append("file", file, fileName);
     return axios
-      .post("http://127.0.0.1:5000/number", formData, {
+      .post("https://digitprediction-server.herokuapp.com/number", formData, {
         headers: {
           mode: "no-cors",
           "Access-Control-Allow-Origin": "*",
@@ -88,7 +89,8 @@ const Canvas = forwardRef((props, ref) => {
         setProb(P);
       })
       .catch((err) => {
-        console.log("Error!");
+        setValue("?");
+        setProb("?");
       });
   }
   return (
