@@ -37,7 +37,7 @@ const Canvas = forwardRef((props, ref) => {
     ctx.fillRect(0, 0, 320, 320);
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-    ctx.lineWidth = 35;
+    ctx.lineWidth = 25;
 
     canvas.addEventListener("mousedown", Down, false);
     canvas.addEventListener("mousemove", Move, false);
@@ -51,7 +51,7 @@ const Canvas = forwardRef((props, ref) => {
   useEffect(() => {
     //펜 <--> 지우개
     ctx.strokeStyle = props.pen ? "black" : "white";
-    ctx.lineWidth = props.pen ? 35 : 50;
+    ctx.lineWidth = props.pen ? 25 : 40;
   }, [props.pen]);
   function Down(e) {
     e.preventDefault();
