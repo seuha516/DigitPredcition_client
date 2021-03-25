@@ -9,9 +9,12 @@ import axios from "axios";
 import "./Canvas.scss";
 import Result from "./Result";
 
-let drawable, X, Y;
-let canvas;
-let ctx;
+let status = {
+  drawable: false,
+  X: -1,
+  Y: -1,
+};
+let canvas, ctx;
 
 const Canvas = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
@@ -25,7 +28,9 @@ const Canvas = forwardRef((props, ref) => {
   const canvasRef = useRef(null);
   const [value, setValue] = useState("?");
   const [prob, setProb] = useState("?");
+
   useEffect(() => {
+    //처음 시작할때 실행됨
     canvas = canvasRef.current;
     ctx = canvas.getContext("2d");
     ctx.fillStyle = "white";
@@ -33,52 +38,63 @@ const Canvas = forwardRef((props, ref) => {
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.lineWidth = 35;
-    canvas.addEventListener("mousedown", Down);
-    canvas.addEventListener("mousemove", Move);
-    canvas.addEventListener("mouseup", Finish);
-    canvas.addEventListener("mouseout", Finish);
+
+    canvas.addEventListener("mousedown", Down, false);
+    canvas.addEventListener("mousemove", Move, false);
+    canvas.addEventListener("mouseup", Finish, false);
+    canvas.addEventListener("mouseout", Finish, false);
     canvas.addEventListener("touchstart", TouchStart, false);
     canvas.addEventListener("touchmove", TouchMove, false);
     canvas.addEventListener("touchend", Finish, false);
     setInterval(CheckImage, 180);
   }, []);
-  function Down(event) {
-    X = event.offsetX;
-    Y = event.offsetY;
-    drawable = true;
+  useEffect(() => {
+    //펜 <--> 지우개
+    ctx.strokeStyle = props.pen ? "black" : "white";
+    ctx.lineWidth = props.pen ? 35 : 50;
+  }, [props.pen]);
+  function Down(e) {
+    e.preventDefault();
+    status.X = e.offsetX;
+    status.Y = e.offsetY;
+    status.drawable = true;
   }
-  function TouchStart(event) {
-    X = event.touches[0].clientX - canvas.getBoundingClientRect().left;
-    Y = event.touches[0].clientY - canvas.getBoundingClientRect().top;
-    drawable = true;
+  function TouchStart(e) {
+    e.preventDefault();
+    status.X = e.touches[0].clientX - canvas.getBoundingClientRect().left;
+    status.Y = e.touches[0].clientY - canvas.getBoundingClientRect().top;
+    status.drawable = true;
   }
-  function Move(event) {
-    if (!drawable) return;
-    let curX = event.offsetX;
-    let curY = event.offsetY;
+  function Move(e) {
+    e.preventDefault();
+    if (!status.drawable) return;
+    let curX = e.offsetX,
+      curY = e.offsetY;
     ctx.beginPath();
-    ctx.moveTo(X, Y);
+    ctx.moveTo(status.X, status.Y);
     ctx.lineTo(curX, curY);
     ctx.stroke();
-    X = curX;
-    Y = curY;
+    status.X = curX;
+    status.Y = curY;
   }
-  function TouchMove(event) {
-    if (!drawable) return;
-    let curX = event.touches[0].clientX - canvas.getBoundingClientRect().left;
-    let curY = event.touches[0].clientY - canvas.getBoundingClientRect().top;
+  function TouchMove(e) {
+    e.preventDefault();
+    if (!status.drawable) return;
+    let curX = e.touches[0].clientX - canvas.getBoundingClientRect().left,
+      curY = e.touches[0].clientY - canvas.getBoundingClientRect().top;
     ctx.beginPath();
-    ctx.moveTo(X, Y);
+    ctx.moveTo(status.X, status.Y);
     ctx.lineTo(curX, curY);
     ctx.stroke();
-    X = curX;
-    Y = curY;
+    status.X = curX;
+    status.Y = curY;
   }
   function Finish() {
-    drawable = false;
+    status.drawable = false;
   }
+
   function CheckImage() {
-    console.log("전송");
+    console.log("이미지 전송");
     const imgBase64 = canvas.toDataURL("image/png", "image/octet-stream");
     const decodImg = atob(imgBase64.split(",")[1]);
     let array = [];
@@ -89,6 +105,7 @@ const Canvas = forwardRef((props, ref) => {
     const fileName = "canvas_img_" + new Date().getMilliseconds() + ".png";
     let formData = new FormData();
     formData.append("file", file, fileName);
+
     return axios
       .post("https://digitprediction-server.herokuapp.com/number", formData, {
         headers: {
@@ -104,6 +121,7 @@ const Canvas = forwardRef((props, ref) => {
         setProb(P);
       })
       .catch((err) => {
+        console.log("ERROR!");
         setValue("?");
         setProb("?");
       });
