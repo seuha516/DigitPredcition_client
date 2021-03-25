@@ -15,6 +15,7 @@ let status = {
   Y: -1,
 };
 let canvas, ctx;
+let loading = false;
 
 const Canvas = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
@@ -28,7 +29,6 @@ const Canvas = forwardRef((props, ref) => {
   const canvasRef = useRef(null);
   const [value, setValue] = useState("?");
   const [prob, setProb] = useState("?");
-
   useEffect(() => {
     //처음 시작할때 실행됨
     canvas = canvasRef.current;
@@ -46,7 +46,12 @@ const Canvas = forwardRef((props, ref) => {
     canvas.addEventListener("touchstart", TouchStart, false);
     canvas.addEventListener("touchmove", TouchMove, false);
     canvas.addEventListener("touchend", Finish, false);
-    setInterval(CheckImage, 180);
+
+    setInterval(() => {
+      if (!loading) {
+        CheckImage();
+      }
+    }, 100);
   }, []);
   useEffect(() => {
     //펜 <--> 지우개
@@ -93,8 +98,9 @@ const Canvas = forwardRef((props, ref) => {
     status.drawable = false;
   }
 
-  function CheckImage() {
-    console.log("이미지 전송");
+  const CheckImage = async () => {
+    let Time = new Date();
+    loading = true;
     const imgBase64 = canvas.toDataURL("image/png", "image/octet-stream");
     const decodImg = atob(imgBase64.split(",")[1]);
     let array = [];
@@ -105,8 +111,7 @@ const Canvas = forwardRef((props, ref) => {
     const fileName = "canvas_img_" + new Date().getMilliseconds() + ".png";
     let formData = new FormData();
     formData.append("file", file, fileName);
-
-    return axios
+    await axios
       .post("https://digitprediction-server.herokuapp.com/number", formData, {
         headers: {
           mode: "no-cors",
@@ -125,7 +130,11 @@ const Canvas = forwardRef((props, ref) => {
         setValue("?");
         setProb("?");
       });
-  }
+    Time = new Date() - Time;
+    console.log("소요 시간 " + String(Time) + "ms");
+    loading = false;
+  };
+
   return (
     <>
       <canvas ref={canvasRef} width="320px" height="320px" />
