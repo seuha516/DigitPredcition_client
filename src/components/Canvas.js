@@ -37,21 +37,36 @@ const Canvas = forwardRef((props, ref) => {
     canvas.addEventListener("mousemove", Move);
     canvas.addEventListener("mouseup", Finish);
     canvas.addEventListener("mouseout", Finish);
-    setInterval(CheckImage, 200);
+    canvas.addEventListener("touchstart", TouchStart, false);
+    canvas.addEventListener("touchmove", TouchMove, false);
+    canvas.addEventListener("touchend", Finish, false);
+    setInterval(CheckImage, 180);
   }, []);
-  useEffect(() => {
-    ctx.strokeStyle = props.pen ? "black" : "white";
-    ctx.lineWidth = props.pen ? 35 : 50;
-  }, [props.pen]);
   function Down(event) {
     X = event.offsetX;
     Y = event.offsetY;
+    drawable = true;
+  }
+  function TouchStart(event) {
+    X = event.touches[0].clientX - canvas.getBoundingClientRect().left;
+    Y = event.touches[0].clientY - canvas.getBoundingClientRect().top;
     drawable = true;
   }
   function Move(event) {
     if (!drawable) return;
     let curX = event.offsetX;
     let curY = event.offsetY;
+    ctx.beginPath();
+    ctx.moveTo(X, Y);
+    ctx.lineTo(curX, curY);
+    ctx.stroke();
+    X = curX;
+    Y = curY;
+  }
+  function TouchMove(event) {
+    if (!drawable) return;
+    let curX = event.touches[0].clientX - canvas.getBoundingClientRect().left;
+    let curY = event.touches[0].clientY - canvas.getBoundingClientRect().top;
     ctx.beginPath();
     ctx.moveTo(X, Y);
     ctx.lineTo(curX, curY);
