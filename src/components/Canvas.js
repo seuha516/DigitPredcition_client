@@ -28,7 +28,7 @@ const Canvas = forwardRef((props, ref) => {
   }));
   const canvasRef = useRef(null);
   const [value, setValue] = useState("?");
-  const [prob, setProb] = useState("?");
+  const [prob, setProb] = useState("loading");
   useEffect(() => {
     //처음 시작할때 실행됨
     canvas = canvasRef.current;
@@ -139,7 +139,7 @@ const Canvas = forwardRef((props, ref) => {
     <>
       <canvas ref={canvasRef} width="320px" height="320px" />
       <div className="Res">
-        <Result value={value} prob={prob + "%"} />
+        <Result value={value} prob={prob + (prob === "loading" ? "" : "%")} />
       </div>
     </>
   );
