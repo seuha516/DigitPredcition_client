@@ -27,7 +27,7 @@ const Canvas = forwardRef((props, ref) => {
     },
   }));
   const canvasRef = useRef(null);
-  const [value, setValue] = useState("?");
+  const [value, setValue] = useState("!");
   const [prob, setProb] = useState("loading");
   useEffect(() => {
     //처음 시작할때 실행됨
