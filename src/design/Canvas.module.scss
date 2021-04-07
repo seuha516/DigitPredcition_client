@@ -110,9 +110,11 @@
 @media all and (min-height: 512px) {
   .area {
     margin-top: calc(-0.25 * (100vh - 512px));
-    .output {
-      margin-top: calc(0.1 * (100vh - 512px));
-    }
+  }
+}
+@media all and (min-height: 512px) and (max-width: 512px) {
+  .area .output {
+    margin-top: calc(0.1 * (100vh - 512px));
   }
 }
 @media all and (max-height: 420px) {
