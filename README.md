@@ -1,8 +1,7 @@
 # 손글씨 숫자 인식기
-
 화면에 숫자를 그리면 그 숫자가 무엇인지 인식하여 나타내는 웹사이트
 
-- [Link To Website]
+- [Link To Website](https://digit-prediction-seuha516.netlify.app)
 
 ## Example
 
@@ -12,6 +11,7 @@
 
 ## Update
 
+- 2021.04.07 모바일 최적화 및 로딩 기능 구현
 - 2021.04.06 아이콘 변경
 - 2021.03.25 첫 배포
 
