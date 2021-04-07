@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkImage, checkServer } from '../modules/painting';
+import { checkImage, checkServer, switchMode } from '../modules/painting';
 import Buttons from './Buttons';
 import Result from './Result';
 import classNames from 'classnames/bind';
@@ -116,6 +116,7 @@ const Canvas = () => {
     ctx.fillRect(0, 0, 320, 320);
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 25;
+    if (!pen) dispatch(switchMode());
   };
   const down = (e) => {
     e.preventDefault();
