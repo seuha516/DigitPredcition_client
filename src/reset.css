@@ -12,8 +12,18 @@
 *:focus {
   outline: none;
 }
+html {
+  width: 100%;
+  height: 100%;
+}
 body {
+  width: 100%;
+  height: 100%;
   background: -webkit-linear-gradient(90deg, #74ebd5, #acb6e5);
+}
+#root {
+  width: 100%;
+  height: 100%;
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 

@@ -123,7 +123,9 @@ const Canvas = () => {
     status = { X: e.offsetX, Y: e.offsetY, drawable: true };
   };
   const touchStart = (e) => {
-    e.preventDefault();
+    if (e.cancelable) {
+      e.preventDefault();
+    }
     status = {
       X: e.touches[0].clientX - canvas.getBoundingClientRect().left,
       Y: e.touches[0].clientY - canvas.getBoundingClientRect().top,
@@ -140,7 +142,9 @@ const Canvas = () => {
     status = { ...status, X: e.offsetX, Y: e.offsetY };
   };
   const touchMove = (e) => {
-    e.preventDefault();
+    if (e.cancelable) {
+      e.preventDefault();
+    }
     if (!status.drawable) return;
     ctx.beginPath();
     ctx.moveTo(status.X, status.Y);

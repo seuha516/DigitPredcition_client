@@ -15,6 +15,7 @@
   height: 22.5px;
   text-shadow: 1px 0 white, 0 1px white, 1px 0 white, 0 1px white;
 }
+
 @media all and (max-width: 720px) {
   .value {
     font-size: 31.25vw;
@@ -64,10 +65,22 @@
 }
 @media all and (max-height: 420px) {
   .value {
+    font-size: 180px;
     height: 160px;
-    margin-top: -15px;
+    margin: -15px 0 10px 0;
   }
   .prob {
+    font-size: 60px;
     height: 70px;
+  }
+}
+@media all and (max-height: 420px) and (max-width: 620px) {
+  .value {
+    font-size: 29vw;
+    height: 25.7vw;
+  }
+  .prob {
+    font-size: 9.68vw;
+    height: 11.3vw;
   }
 }

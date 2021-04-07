@@ -7,7 +7,7 @@
 }
 
 .area {
-  @include flexbox(100vw, 100vh);
+  @include flexbox(100%, 100%);
   flex-direction: column;
   overflow: hidden;
 }
