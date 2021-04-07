@@ -9,6 +9,5 @@
 .area {
   @include flexbox(100vw, 100vh);
   flex-direction: column;
-  justify-content: flex-start;
   overflow: hidden;
 }
