@@ -15,6 +15,21 @@
   height: 22.5px;
   text-shadow: 1px 0 white, 0 1px white, 1px 0 white, 0 1px white;
 }
+@media all and (max-width: 720px) {
+  .value {
+    font-size: 31.25vw;
+    height: 27.78vw;
+    margin-bottom: 4.17vw;
+  }
+  .prob {
+    font-size: 9.72vw;
+    height: 10.42vw;
+  }
+  .delay {
+    font-size: 2.78vw;
+    height: 3.125vw;
+  }
+}
 @media all and (max-width: 512px) {
   .value {
     font-size: 160px;
@@ -25,6 +40,10 @@
     font-size: 55px;
     height: 40px;
     margin-bottom: 15px;
+  }
+  .delay {
+    font-size: 20px;
+    height: 22.5px;
   }
 }
 @media all and (max-width: 400px) {
@@ -40,17 +59,15 @@
   }
   .delay {
     font-size: 15px;
+    height: 12.5px;
   }
 }
 @media all and (max-height: 420px) {
   .value {
-    font-size: 160px;
-    height: 150px;
-    margin: 0;
+    height: 160px;
+    margin-top: -15px;
   }
   .prob {
-    font-size: 50px;
-    height: 45px;
-    margin-bottom: 5px;
+    height: 70px;
   }
 }

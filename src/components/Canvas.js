@@ -64,7 +64,7 @@ const Canvas = () => {
         }, 100);
       })
       .catch((err) => {
-        alert('서버가 응답하지 않습니다.');
+        alert('서버에서 에러가 발생했습니다.');
         console.log(err);
         dispatch(checkServer({ serverStatus: false }));
         dispatch(checkImage({ value: `' ^'`, prob: '0', delay: '1000' }));
