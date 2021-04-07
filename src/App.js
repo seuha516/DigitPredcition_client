@@ -1,13 +1,15 @@
-import React from "react";
-import "./components/Mainsetting.scss";
-import Title from "./components/Title";
-import Paint from "./components/Paint";
+import React from 'react';
+import Title from './components/Title';
+import Canvas from './components/Canvas';
+import classNames from 'classnames/bind';
+import styles from './design/DisplayArea.module.scss';
+const cx = classNames.bind(styles);
 
 const App = () => {
   return (
-    <div className="items">
+    <div className={cx('area')}>
       <Title />
-      <Paint />
+      <Canvas />
     </div>
   );
 };

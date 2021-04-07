@@ -1,0 +1,56 @@
+.value {
+  font-size: 225px;
+  color: rgb(0, 0, 0);
+  height: 200px;
+  margin-bottom: 30px;
+}
+.prob {
+  font-size: 70px;
+  color: rgb(95, 95, 95);
+  height: 75px;
+}
+.delay {
+  font-size: 20px;
+  color: rgb(56, 29, 129);
+  height: 22.5px;
+  text-shadow: 1px 0 white, 0 1px white, 1px 0 white, 0 1px white;
+}
+@media all and (max-width: 512px) {
+  .value {
+    font-size: 160px;
+    height: 150px;
+    margin: -10px 30px 0px 0px;
+  }
+  .prob {
+    font-size: 55px;
+    height: 40px;
+    margin-bottom: 15px;
+  }
+}
+@media all and (max-width: 400px) {
+  .value {
+    font-size: 130px;
+    height: 120px;
+    margin: -10px 25px 0px 0px;
+  }
+  .prob {
+    font-size: 45px;
+    height: 40px;
+    margin-bottom: 5px;
+  }
+  .delay {
+    font-size: 15px;
+  }
+}
+@media all and (max-height: 420px) {
+  .value {
+    font-size: 160px;
+    height: 150px;
+    margin: 0;
+  }
+  .prob {
+    font-size: 50px;
+    height: 45px;
+    margin-bottom: 5px;
+  }
+}

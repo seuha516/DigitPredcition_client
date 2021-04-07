@@ -1,0 +1,118 @@
+@mixin flexbox($W, $H) {
+  width: $W;
+  height: $H;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.area {
+  @include flexbox(100%, 100%);
+  margin-bottom: 7.5vh;
+  .input {
+    @include flexbox(400px, 100%);
+    flex-direction: column;
+    .canvas {
+      border: 2px solid rgb(43, 43, 43);
+      margin-bottom: 20px;
+    }
+    .waitMessage {
+      width: 304px;
+      height: 304px;
+      background-color: rgb(255, 255, 255);
+      font-size: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      :nth-child(1) {
+        font-family: 'Nanum Pen Script', cursive;
+        animation-name: move;
+        animation-duration: 3s;
+        animation-timing-function: 3s linear;
+        animation-iteration-count: infinite;
+        font-size: 70px;
+        width: 300px;
+        height: 170px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      :nth-child(2) {
+        font-family: 'Nanum Gothic', sans-serif;
+        font-size: 18.5px;
+        width: 300px;
+        height: 130px;
+        line-height: 22.5px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+    }
+  }
+  .output {
+    @include flexbox(250px, 100%);
+    font-family: 'Baloo 2', cursive;
+    text-shadow: 2px 0 white, 0 2px white, 2px 0 white, 0 2px white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+@keyframes move {
+  0% {
+    color: black;
+  }
+  50% {
+    color: rgb(167, 167, 167);
+  }
+  100% {
+    color: rgb(0, 0, 0);
+  }
+}
+
+@media all and (max-width: 512px) {
+  .area {
+    flex-direction: column;
+    .input {
+      width: 100%;
+      height: 300px;
+      flex-direction: row;
+      .canvas {
+        margin-bottom: 0;
+      }
+    }
+    .output {
+      margin-top: 20px;
+      height: 160px;
+      width: 100%;
+      flex-direction: row;
+    }
+  }
+}
+@media all and (max-width: 400px) {
+  .area {
+    .input {
+      flex-direction: column;
+      height: 350px;
+    }
+    .output {
+      margin-top: -15px;
+    }
+  }
+}
+@media all and (max-height: 624px) {
+  .area {
+    margin-bottom: 0;
+  }
+}
+@media all and (max-height: 420px) {
+  .area {
+    .input {
+      flex-direction: row;
+      .canvas {
+        margin: 0px 0px 0px 10px;
+      }
+    }
+  }
+}

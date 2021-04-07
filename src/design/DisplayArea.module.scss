@@ -1,0 +1,14 @@
+@mixin flexbox($W, $H) {
+  width: $W;
+  height: $H;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.area {
+  @include flexbox(100vw, 100vh);
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
