@@ -14,7 +14,7 @@
 - 2021.04.06 아이콘 변경
 - 2021.03.25 첫 배포
 
-## Client
+## FrontEnd
 - FrontEnd: _React_
 - 구현 기능:
   - Canvas를 이용한 그림 그리기
