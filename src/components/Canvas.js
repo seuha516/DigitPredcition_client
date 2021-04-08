@@ -16,6 +16,7 @@ let status = {
 };
 let canvas, ctx;
 let loading = false;
+let checkLimit = 2;
 
 const Canvas = () => {
   const dispatch = useDispatch();
@@ -66,8 +67,14 @@ const Canvas = () => {
       .catch((err) => {
         alert('서버에서 에러가 발생했습니다.');
         console.log(err);
-        dispatch(checkServer({ serverStatus: false }));
-        dispatch(checkImage({ value: `' ^'`, prob: '0', delay: '1000' }));
+        if (checkLimit > 0) {
+          console.log(`${checkLimit}번 더 재시도합니다.`);
+          checkLimit--;
+          ready();
+        } else {
+          dispatch(checkServer({ serverStatus: false }));
+          dispatch(checkImage({ value: `' ^'`, prob: '0', delay: '1000' }));
+        }
       });
   };
   const check = async () => {
