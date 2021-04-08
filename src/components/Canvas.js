@@ -55,7 +55,12 @@ const Canvas = () => {
   const ready = async () => {
     console.log('서버가 준비됐는지 확인');
     await axios
-      .get('https://digit-prediction-backend.herokuapp.com/check')
+      .get('https://digit-prediction-backend.herokuapp.com/check', {
+        headers: {
+          mode: 'no-cors',
+          'Access-Control-Allow-Origin': '*',
+        },
+      })
       .then((res) => {
         console.log(res.data);
         dispatch(checkServer({ serverStatus: true }));
@@ -65,13 +70,13 @@ const Canvas = () => {
         }, 100);
       })
       .catch((err) => {
-        alert('서버에서 에러가 발생했습니다.');
         console.log(err);
         if (checkLimit > 0) {
           console.log(`${checkLimit}번 더 재시도합니다.`);
           checkLimit--;
           ready();
         } else {
+          alert('서버에서 에러가 발생했습니다.');
           dispatch(checkServer({ serverStatus: false }));
           dispatch(checkImage({ value: `' ^'`, prob: '0', delay: '1000' }));
         }
